@@ -1,4 +1,4 @@
-import {React} from "react";
+import React from "react";
 import Header from "./common/Header"
 
 const MainPage = () => {
@@ -9,7 +9,6 @@ const MainPage = () => {
       <Header/>
       <h1>Main Page</h1>
     </>
-    
   );
 };
 

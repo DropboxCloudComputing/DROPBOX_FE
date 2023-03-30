@@ -1,0 +1,8 @@
+.navbar {
+    border: 3px solid #007ee5;
+  }
+  
+  .navbar-brand {
+    font-size: 25px;
+    font-weight: 800;
+  }
