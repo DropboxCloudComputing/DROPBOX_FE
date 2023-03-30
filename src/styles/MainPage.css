@@ -1,0 +1,9 @@
+.main-layout {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-block{
+    padding: 10px;
+}
+

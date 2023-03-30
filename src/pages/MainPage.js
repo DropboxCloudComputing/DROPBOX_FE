@@ -1,5 +1,7 @@
 import React from "react";
-import Header from "./common/Header"
+import Header from "./common/Header";
+import Sidebar from "./common/Sidebar";
+import "../styles/MainPage.css";
 
 const MainPage = () => {
   //const [uploadOpen, setUploadOpen] = useState(false);
@@ -7,7 +9,12 @@ const MainPage = () => {
   return(
     <>
       <Header/>
-      <h1>Main Page</h1>
+      <div className="main-layout">
+        <Sidebar/>
+        <div class="main-block">
+          <h1>Main Page</h1>
+        </div>
+      </div>
     </>
   );
 };
