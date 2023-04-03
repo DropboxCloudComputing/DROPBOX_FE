@@ -5,13 +5,16 @@ import './index.css';
 import App from './App';
 import Header from './pages/common/Header'
 import reportWebVitals from './reportWebVitals';
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Header />
-      <App />
+      <RecoilRoot>
+        <Header />
+        <App />
+      </RecoilRoot>
     </BrowserRouter>
   </React.StrictMode>
 );
