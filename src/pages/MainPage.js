@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./common/Header";
 import Sidebar from "./common/Sidebar";
 import "../styles/MainPage.css";
 
@@ -8,7 +7,6 @@ const MainPage = () => {
 
   return(
     <>
-      <Header/>
       <div className="main-layout">
         <Sidebar/>
         <div class="main-block">
