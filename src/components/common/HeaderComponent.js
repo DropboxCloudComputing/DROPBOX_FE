@@ -1,6 +1,6 @@
 import React,{Fragment} from "react";
 import {Navbar,Nav,Container} from "react-bootstrap";
-import Logo from "../../logo.svg";
+import Logo from "../../image.jpg";
 import "../../styles/Header.css";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {loggedInState} from "../../recoil/atom"
@@ -34,7 +34,7 @@ const HeaderComponent = () =>{
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <img
                         alt="Logo"
                         src={Logo}
@@ -42,7 +42,7 @@ const HeaderComponent = () =>{
                         height="30"
                         className="d-inline-block align-top"
                     />{' '}
-                    DROPBOX
+                    꾸깃
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="loginbar"/>
                 <Navbar.Collapse id="loginbar">
