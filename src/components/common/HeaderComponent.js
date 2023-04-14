@@ -1,59 +1,28 @@
 import React,{Fragment} from "react";
-import {Navbar,Nav,Container} from "react-bootstrap";
-import Logo from "../../image.jpg";
-import "../../styles/Header.css";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import {loggedInState} from "../../recoil/atom"
+import {Link} from "react-router-dom";
+//import '../styles/Header.css';
 
-const DefaultButton = () => {
+const HeaderCompnent = () => {
     return(
-        <Fragment>
-            <Nav.Link href="/login">로그인</Nav.Link>
-            <Nav.Link eventKey={2} href="/signup">회원가입</Nav.Link>
-        </Fragment>
+        <>
+            <header className='bg-white border-b-4'>
+                <nav class="header-nav" aria-label="Global">
+                    <div class="flex lg:flex-1">
+                        <Link to="https://clownhacker.tistory.com/159" class="-m-1.5 p-1.5 space-x-4 flex">
+                            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                            <h1 class="sr-only sm:not-sr-only">KKHU_GIT</h1>
+                        </Link>
+                    </div>
+
+                    <div class="header-component mr-5">
+                        <Link to="https://clownhacker.tistory.com/159" class="header-login">Log Out
+                            <span aria-hidden="true">&rarr;</span>
+                        </Link>
+                    </div>
+                </nav>
+            </header>
+        </>
     );
 };
 
-const Logout = () => { 
-    let setLoggedInState = useSetRecoilState(loggedInState);
-    const ChangeLoggedInState = () => {
-        setLoggedInState(() => false);
-    };
-
-    return(
-        <Fragment>
-            <Nav.Link href="/" onClick={ChangeLoggedInState}>
-                로그아웃
-            </Nav.Link>
-        </Fragment>
-    )
-};
-
-const HeaderComponent = () =>{
-    const loggedIn = useRecoilValue(loggedInState);
-    return (
-        <Navbar bg="dark" variant="dark">
-            <Container>
-                <Navbar.Brand href="/">
-                    <img
-                        alt="Logo"
-                        src={Logo}
-                        width="30"
-                        height="30"
-                        className="d-inline-block align-top"
-                    />{' '}
-                    꾸깃
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="loginbar"/>
-                <Navbar.Collapse id="loginbar">
-                    <Nav className="ms-auto">
-                        {loggedIn ? <Logout /> : null}
-                        {!loggedIn ? <DefaultButton /> : null}
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
-    );
-};
-
-export default HeaderComponent;
+export default HeaderCompnent;

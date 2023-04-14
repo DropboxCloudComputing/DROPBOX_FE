@@ -1,8 +1,12 @@
 import React from "react";
-import MainPageContainer from "../container/MainPageContainer";
+import MainPageContainer from "../containers/MainPageContainer";
 
 const MainPage = () => {
-  return <MainPageContainer />;
+    return (
+        <>
+            <MainPageContainer />
+        </>
+    )
 };
 
 export default MainPage;
