@@ -1,3 +1,21 @@
+# Directory Description
+
+### components
+
+작은 기능들을 component 단위로 나누어 모아놓은 폴더입니다.
+
+### containers
+
+컴포넌트들을 모은 container들을 모든 폴더입니다.
+
+### pages
+
+최종적으로 메인 프로젝트에 나오는 페이지들을 모은 폴더입니다.
+
+### index.css
+
+tailwind className이 너무 길기 때문에 가독성을 위해 className을 빼놓아 모은 파일입니다.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
