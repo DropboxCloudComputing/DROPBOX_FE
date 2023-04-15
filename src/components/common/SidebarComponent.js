@@ -9,7 +9,7 @@ const SidebarComponent = () => {
 
     return (
         <>
-            <div className="w-60 h-screen p-5 bg-gray-50">
+            <div className="w-60 h-screen p-5 bg-gray-100">
                 {menus.map((menu, index) => {
                     return (
                         <Link to={menu.path} key={index}>
