@@ -30,12 +30,13 @@
 
 // export default UploadComponent; 
 
-import React, { Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { useRecoilState } from 'recoil';
 import { fileListState } from "../recoil/atom";
 
+
 function UploadComponent() {
-    const [fileList,setFileList] = useRecoilState(fileListState);
+    const [fileList, setFileList] = useRecoilState(fileListState);
 
     const handleFileChange = (event) => {
         event.preventDefault();
@@ -44,9 +45,9 @@ function UploadComponent() {
 
         const uploadFileStruct = {
             filename: filename,
-            ext : extension
+            ext: extension
         }
-        setFileList([...fileList,uploadFileStruct]);
+        setFileList([...fileList, uploadFileStruct]);
     };
 
     return (
