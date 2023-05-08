@@ -13,7 +13,7 @@ const MainPageComponent = () => {
             <Header />
             <div className="flex flex-row">
                 <Sidebar />
-                <div className="flex-col">
+                <div className="flex-col justify-center items-center">
                     <UploadComponent />
                     <FileListComponent />
                 </div>

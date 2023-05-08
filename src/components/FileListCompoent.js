@@ -26,20 +26,22 @@ const FileListComponent = () => {
 
     return (
         <>
-            <div className='flex flex-wrap'>
+            <div className='flex flex-wrap ml-5 text-center'>
                 {fileList.map((file) => (
-                        <div key={file.id} className="justify-center overflow-auto rounded-lg border-gray-300 border-2 px-4 py-2 mx-2 bg-white w-48 h-48 shadow-sm mt-2">
-                            <div className="flex-grow-0">
-                                <span className="text-sm font-medium text-gray-600">{file.name}</span>
-                                <span className="text-xs text-gray-500">{formatBytes(file.size)}</span>
+                        <div key={file.id} className="justify-center relative overflow-auto rounded-lg border-gray-300 border-2 px-4 py-2 mx-5 bg-white w-48 h-48 shadow-sm my-3">
+                            <div className="flex-col">
+                                <div className="text-sm font-medium text-gray-600">{file.name}</div>
+                                <div className="text-xs text-gray-500">{formatBytes(file.size)}</div>
                             </div>
-                            <button
-                                type="button"
-                                className="ml-4 px-2 py-1 bg-red-500 text-white text-xs font-medium rounded"
-                                onClick={() => handleDelete(file.id)}
-                            >
-                                Delete
-                            </button>
+                            <div className='absolute bottom-2 inset-x-10'>
+                                <button
+                                    type="button"
+                                    className="px-2 py-1 bg-red-500 text-white text-xs font-medium rounded"
+                                    onClick={() => handleDelete(file.id)}
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                 ))}
             </div>
