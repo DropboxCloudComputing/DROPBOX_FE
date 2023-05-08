@@ -13,8 +13,10 @@ const MainPageComponent = () => {
             <Header />
             <div className="flex flex-row">
                 <Sidebar />
-                <UploadComponent />
-                <FileListComponent />
+                <div className="flex-col">
+                    <UploadComponent />
+                    <FileListComponent />
+                </div>
             </div>
             
         </>
