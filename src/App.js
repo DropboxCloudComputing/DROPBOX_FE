@@ -4,12 +4,12 @@ import React from "react";
 import {Routes,Route} from "react-router-dom";
 import Login from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
-import UploadComponent from "./components/UploadComponent";
+import UploadContainer from "./containers/UploadContainer";
 function App() {
   return (
     <>
       <Routes>
-        <Route element={<UploadComponent />} path="/test" />
+        <Route element={<UploadContainer />} path="/test" />
         <Route element={<MainPage />} path="/" />
         <Route element={<Login />} path="/login" />
       </Routes>
