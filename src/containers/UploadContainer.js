@@ -14,6 +14,9 @@ const UploadContainer = () => {
 
     return(
         <Fragment>
+            <div>
+
+            </div>
             <button onClick={openModal} className="flex">업로드</button>
             <UploadComponent open={modalOpen} close={closeModal} />
         </Fragment>

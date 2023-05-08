@@ -40,14 +40,15 @@ function UploadComponent() {
 
     const handleFileChange = (event) => {
         event.preventDefault();
-        const filename = event.target.files[0].name;
-        const extension = event.target.files[0].name.split(".")[1];
+        const file = event.target.files[0];
+        console.log(file);
+        const newFile = {
+            id: file.lastModified,
+            name: file.name,
+            size: file.size,
+        };
 
-        const uploadFileStruct = {
-            filename: filename,
-            ext: extension
-        }
-        setFileList([...fileList, uploadFileStruct]);
+        setFileList([...fileList, newFile]);
     };
 
     return (
