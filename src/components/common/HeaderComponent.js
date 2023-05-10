@@ -27,14 +27,14 @@ const HeaderCompnent = () => {
             <header className='bg-white border-b-4'>
                 <nav className="header-nav" aria-label="Global">
                     <div className="flex lg:flex-none">
-                        <Link to="https://clownhacker.tistory.com/159" className="-m-1.5 p-1.5 space-x-4 flex">
+                        <Link to="/" className="-m-1.5 p-1.5 space-x-4 flex">
                             <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                             <h1 className="sr-only sm:not-sr-only">KKHU_GIT</h1>
                         </Link>
                     </div>
                     <SearchCompoenent/>
                     <div className="header-component mr-5">
-                        <Link to="https://clownhacker.tistory.com/159" className="header-login">Log Out
+                        <Link to="/login" className="header-login">Log Out
                             <span aria-hidden="true">&rarr;</span>
                         </Link>
                     </div>
