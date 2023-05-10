@@ -1,11 +1,18 @@
 import React,{Fragment} from "react";
 import {Link} from "react-router-dom";
+import Logo from "../../static/logo-ball.webp";
 
 const SearchCompoenent = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(event.target[0].value);
+    };
+
+    
     return (
         <>
             <Fragment>
-                <form className="w-2/5">
+                <form className="w-2/5" onSubmit={handleSubmit}>
                     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -21,14 +28,14 @@ const SearchCompoenent = () => {
 };
 
 
-const HeaderCompnent = () => {
+const HeaderComponent = () => {
     return(
         <>
             <header className='bg-white border-b-4'>
                 <nav className="header-nav" aria-label="Global">
                     <div className="flex lg:flex-none">
                         <Link to="/" className="-m-1.5 p-1.5 space-x-4 flex">
-                            <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                            <img className="h-8 w-auto" src={Logo} alt="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" />
                             <h1 className="sr-only sm:not-sr-only">KKHU_GIT</h1>
                         </Link>
                     </div>
@@ -44,4 +51,4 @@ const HeaderCompnent = () => {
     );
 };
 
-export default HeaderCompnent;
+export default HeaderComponent;

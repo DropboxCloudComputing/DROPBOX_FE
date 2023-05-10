@@ -2,7 +2,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { fileListState } from '../recoil/atom';
 
-const FileListComponent = () => {
+const FileListComponent = (is_trash) => {
     const [fileList,setFileList] = useRecoilState(fileListState);
 
     const handleDelete = (fileId) => {

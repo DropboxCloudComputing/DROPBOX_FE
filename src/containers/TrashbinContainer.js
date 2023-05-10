@@ -1,20 +1,16 @@
 import { React } from "react";
 import Header from "../pages/common/Header";
 import Sidebar from "../pages/common/Sidebar";
-import UploadComponent from "./UploadComponent";
-import FileListComponent from "./FileListCompoent";
-//import { useRecoilValue } from "recoil";
-//import { fileListState } from "../recoil/atom";
+import FileListComponent from "../components/FileListCompoent";
 
-const MainPageComponent = (is_trash) => {
+const TrashbinContainer = () => {
     return (
         <>
             <Header />
             <div className="flex flex-row">
                 <Sidebar />
                 <div className="flex-col justify-center items-center">
-                    <UploadComponent/>
-                    <FileListComponent is_trash={is_trash}/>
+                    <FileListComponent is_trash={true}/>
                 </div>
             </div>
             
@@ -22,4 +18,4 @@ const MainPageComponent = (is_trash) => {
     );
 };
 
-export default MainPageComponent;
+export default TrashbinContainer;

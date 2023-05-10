@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import garbage from "../../static/garbage.png"
 import { useRecoilValue } from 'recoil';
@@ -6,6 +6,12 @@ import { sharedFolderState } from "../../recoil/atom";
 
 const SidebarComponent = () => {
     const sharedFolder = useRecoilValue(sharedFolderState);
+    const [folders, setFolders] = useState([]);
+  
+    const handleNewFolderSubmit = (event) => {
+      event.preventDefault();
+      setFolders([...folders,]);
+    };
 
     return (
         <>
@@ -18,21 +24,32 @@ const SidebarComponent = () => {
                         </div>
                     </Link>
                 </div>
+                <div className="container mx-auto my-1 end-0 relative pt-5 items-center text-center">
+                    <form onSubmit={handleNewFolderSubmit}>
+                        <button
+                            type="submit"
+                            className="bg-stone-600 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                        >
+                            Create Folder
+                        </button>
+                    </form>
+                </div>
                 <div>
-                    <div className="ml-8 text-gray-400 text-base sm:text-base rounded-lg block p-2.5 mt-2">
+                    <div className="ml-8 text-gray-400 text-base sm:text-base rounded-lg block p-2.5 mt-5">
                         <p>공유된 폴더</p>
                     </div>
                 </div>
                 {sharedFolder.map((menu, index) => {
                     return (
                         <Link to={menu.path} key={index}>
-                            <div className="my-2 text-gray-900 text-base sm:text-base rounded-lg block w-full p-2.5">
+                            <div className="text-center my-2 text-gray-900 text-base sm:text-base rounded-lg block w-full p-2.5">
                                 <p>{menu.name}</p>
                             </div>
                         </Link>
                     )
                 })}
             </div>
+
         </>
     );
 };
