@@ -41,7 +41,6 @@ function UploadComponent() {
     const handleFileChange = (event) => {
         event.preventDefault();
         const file = event.target.files[0];
-        console.log(file);
         const newFile = {
             id: file.lastModified,
             name: file.name,
@@ -50,7 +49,7 @@ function UploadComponent() {
 
         setFileList([...fileList, newFile]);
     };
-
+    
     return (
         <Fragment>
             <form onSubmit={handleFileChange}>
