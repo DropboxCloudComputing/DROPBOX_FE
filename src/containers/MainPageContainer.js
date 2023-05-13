@@ -4,7 +4,7 @@ import MainPageComponent from "../components/MainPageComponent";
 const MainPageContainer = () => {
     return(
         <>
-            <MainPageComponent is_trash={false}/>
+            <MainPageComponent />
         </> 
     );
 };

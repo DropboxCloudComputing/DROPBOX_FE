@@ -7,6 +7,7 @@ import { fileListState } from "../recoil/atom";
 
 const TrashbinContainer = () => {
     const fileList = useRecoilValue(fileListState);
+    
     return (
         <>
             <Header />
@@ -14,7 +15,7 @@ const TrashbinContainer = () => {
                 <Sidebar />
                 <div className="flex-col justify-center items-center">
                     <div className='flex flex-wrap ml-5 text-center'>
-                        {fileList.map((file) => (
+                        {fileList.filter((file) => file.is_delete === 1).map((file) => (
                             <FileComponent key={file.id} id={file.id} description={file} />
                         ))}
                     </div>

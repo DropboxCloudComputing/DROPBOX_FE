@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { fileListState, isFileOpenState,FileIdState } from '../recoil/atom';
 
 const FileDescription = ({ _id, props }) => {
-    const [isFileOpen, setIsFileOpen] = useRecoilState(isFileOpenState);
+    const setIsFileOpen = useSetRecoilState(isFileOpenState);
     const fileId = useRecoilValue(FileIdState);
 
 
@@ -14,9 +14,9 @@ const FileDescription = ({ _id, props }) => {
     return (
         <>
             {fileId == _id &&
-                <div className={"text-center bg-gray-100 absolute top-28 right-0 h-full z-10 duration-75"}>
+                <div className={"text-center bg-gray-100 absolute top-28 bottom-28 right-0 h-screen z-10 duration-75 border-4 border-gray-200 w-52"}>
                     <h2 className="text-lg font-bold mb-2">{props.name}</h2>
-                    <p>This is the content of the popup.</p>
+                    <p>{props.size}</p>
                     <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
                         onClick={handleDescriptionClose}
@@ -33,7 +33,7 @@ const FileDescription = ({ _id, props }) => {
 const FileComponent = ({ id, description }) => {
     const [fileList, setFileList] = useRecoilState(fileListState);
     const [isFileOpen, setIsFileOpen] = useRecoilState(isFileOpenState);
-    const [fileId,setFileId] = useRecoilState(FileIdState);
+    const setFileId = useSetRecoilState(FileIdState);
 
     const handleDelete = (fileId) => {
         setFileList(fileList.filter((file) => file.id !== fileId));
@@ -42,8 +42,6 @@ const FileComponent = ({ id, description }) => {
     const handleFileOpen = (event) => {
         setFileId(event.target.value);
         setIsFileOpen(true);
-        console.log(fileId);
-        console.log(isFileOpen);
     }
 
     function formatBytes(bytes, decimals = 2) {
