@@ -20,9 +20,9 @@ const SidebarComponent = () => {
             <div className="p-5 w-60 bg-gray-100 overflow-auto h-screen">
                 <div>
                     <Link to={'/trashbin'} onClick={resetDescription}>
-                        <div className="flex items-center text-base text-center w-full p-3 ml-1 border-2 rounded-lg hover:bg-gray-300">
+                        <div className="relative flex items-center text-base text-center w-full p-3 ml-1 border-2 rounded-lg hover:bg-gray-300">
                             <img src={garbage} alt="garbage" className="w-4 h-4 mr-2" />
-                            <p>휴지통</p>
+                            <p>Trashbin</p>
                         </div>
                     </Link>
                 </div>

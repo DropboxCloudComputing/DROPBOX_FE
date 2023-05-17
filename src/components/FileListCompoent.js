@@ -1,32 +1,69 @@
-import React, { Fragment } from 'react';
+import React, { Fragment,useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { fileListState, isFileOpenState,FileIdState } from '../recoil/atom';
+import { fileListState, isFileOpenState, FileIdState } from '../recoil/atom';
+
+
+function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
 
 const FileDescription = ({ _id, props }) => {
     const setIsFileOpen = useSetRecoilState(isFileOpenState);
     const fileId = useRecoilValue(FileIdState);
-
+    const options = ['Option 1', 'Option 2', 'Option 3'];
+    const [selectedOption, setSelectedOption] = useState('');
+  
+    const handleSelectChange = (event) => {
+      setSelectedOption(event.target.value);
+    };
 
     const handleDescriptionClose = () => {
         setIsFileOpen(false);
     };
 
+    const handleDownload = (url) => {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = url.substring(url.lastIndexOf('/') + 1);
+        link.click();
+      };
+
     return (
         <>
             {fileId == _id &&
                 <div className={"text-center bg-gray-100 absolute top-28 bottom-28 right-0 h-screen z-10 duration-75 border-4 border-gray-200 w-52"}>
-                    <h2 className="text-lg font-bold mb-2">{props.name}</h2>
-                    <p>{props.size}</p>
                     <button
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                        className="border-2 font-bold py-2 px-4 rounded mt-4"
                         onClick={handleDescriptionClose}
                     >
-                        Close
+                        X
+                    </button>
+                    <h2 className="py-3.5 text-lg font-bold mb-2">{props.name}</h2>
+                    <p className='pb-1.5'>{formatBytes(props.size)}</p>
+                    <select
+                        className="px-4 py-2 border border-gray-300 rounded-md"
+                        value={selectedOption}
+                        onChange={handleSelectChange}>
+                        <option value="">Version</option>
+                        {options.map((option) => (
+                            <option key={option} value={option}>{option}</option>
+                        ))}
+                    </select>
+                    <p>Memo</p>
+                    <button
+                        className="mt-5 border-2 bg-gray-200 hover:bg-gray-500 font-bold py-2 px-4 rounded"
+                        onClick={() => handleDownload(props.url)}
+                    >
+                        Download
                     </button>
                 </div>}
         </>
-        //className={isOpen ? "bg-gray-100 absolute top-28 right-0 h-full z-10 duration-75 w-40" : "hidden"}
-
     )
 }
 
@@ -42,15 +79,6 @@ const FileComponent = ({ id, description }) => {
     const handleFileOpen = (event) => {
         setFileId(event.target.value);
         setIsFileOpen(true);
-    }
-
-    function formatBytes(bytes, decimals = 2) {
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
     return (
