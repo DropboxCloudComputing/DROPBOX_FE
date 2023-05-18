@@ -56,6 +56,7 @@ const FileDescription = ({ _id, props }) => {
                         ))}
                     </select>
                     <p>Memo</p>
+                    <p></p>
                     <button
                         className="mt-5 border-2 bg-gray-200 hover:bg-gray-500 font-bold py-2 px-4 rounded"
                         onClick={() => handleDownload(props.url)}
@@ -73,7 +74,17 @@ const FileComponent = ({ id, description }) => {
     const setFileId = useSetRecoilState(FileIdState);
 
     const handleDelete = (fileId) => {
-        setFileList(fileList.filter((file) => file.id !== fileId));
+        setFileList(fileList => {
+            return fileList.map(file =>{
+                if(file.id === fileId){
+                    return{
+                        ...file,
+                        is_delete : 1
+                    };
+                }
+                return file;
+            });
+        });
     };
 
     const handleFileOpen = (event) => {
