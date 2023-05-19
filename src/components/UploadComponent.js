@@ -10,7 +10,7 @@ function UploadComponent() {
         event.preventDefault();
         const file = event.target.files[0];
         const newFile = {
-            id: file.lastModified,
+            id: file.id ? file.id : 10,
             name: file.name,
             size: file.size,
             is_delete: 0

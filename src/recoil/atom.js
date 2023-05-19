@@ -15,8 +15,8 @@ export const fileListState = atom({
 export const sharedFolderState = atom({
     key : 'sharedList',
     default : [
-        { id: 1, name: '클라우드 컴퓨팅'},
-        { id: 2, name: '소프트웨어 공학'},
+        { id: 1, name: '클라우드 컴퓨팅', path: ''},
+        { id: 2, name: '소프트웨어 공학', path: ''},
     ]
 });
 
