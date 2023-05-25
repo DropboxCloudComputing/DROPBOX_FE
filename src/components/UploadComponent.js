@@ -22,7 +22,7 @@ function UploadComponent() {
     return (
         <Fragment>
             <form onSubmit={handleFileChange}>
-                <div className="mx-44 my-3.5 relative w-9/12 h-48 bg-gray-200 border-4 border-dotted border-gray-300 rounded-xl overflow-hidden">
+                <div className="justify-center relative overflow-auto rounded-lg border-dotted bg-gray-200 border-gray-300 border-2 px-4 py-2 mx-5 w-48 h-48 shadow-sm my-3">
                     <label htmlFor="file-input" className="absolute inset-0 cursor-pointer">
                         <input id="file-input" type="file" className="sr-only" onChange={handleFileChange} />
                         <span className="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
@@ -37,5 +37,7 @@ function UploadComponent() {
         </Fragment>
     );
 }
+
+//mx-44 my-3.5 relative w-9/12 h-48 bg-gray-200 border-4 border-dotted border-gray-300 rounded-xl overflow-hidden
 
 export default UploadComponent;

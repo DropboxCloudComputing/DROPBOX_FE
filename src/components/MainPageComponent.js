@@ -16,8 +16,9 @@ const MainPageComponent = (is_trash) => {
             <div className="flex flex-row">
                 <Sidebar />
                 <div className="flex-col justify-center items-center">
-                    <UploadComponent/>
+                    
                     <div className='flex flex-wrap ml-5 text-center'>
+                        <UploadComponent/>
                         {fileList.filter((file) => file.is_delete === 0).map((file) => (
                             <FileComponent key={file.id} id={file.id} description={file}/>
                         ))}
