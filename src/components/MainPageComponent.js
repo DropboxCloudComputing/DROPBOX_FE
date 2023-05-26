@@ -3,29 +3,40 @@ import Header from "../pages/common/Header";
 import Sidebar from "../pages/common/Sidebar";
 import UploadComponent from "./UploadComponent";
 import FileComponent from "./FileListCompoent";
-import { useRecoilState } from "recoil";
-import { fileListState } from "../recoil/atom";
+import { useRecoilValue } from "recoil";
+import { fileListState, folderListState } from "../recoil/atom";
+import FolderListComponent from "./FolderListComponent";
 
-const MainPageComponent = (is_trash) => {
-    const [fileList, setFileList] = useRecoilState(fileListState);
-
+const MainPageComponent = () => {
+    const fileList = useRecoilValue(fileListState);
+    const folderList = useRecoilValue(folderListState);
 
     return (
         <>
             <Header />
             <div className="flex flex-row">
                 <Sidebar />
-                <div className="flex-col justify-center items-center">
-                    
+                <div className="relative ml-56 flex-col justify-center items-center">
+                    <div className="ml-10 my-3">
+                        <h1>Folders</h1>
+                    </div>
+                    <div className="flex flex-wrap ml-5 text-center">
+                        {folderList.map((folder) => (
+                            <FolderListComponent key={folder.id} id={folder.id} description={folder} />
+                        ))}
+                    </div>
+                    <div className="ml-10 my-3">
+                        <h1>Files</h1>
+                    </div>
                     <div className='flex flex-wrap ml-5 text-center'>
-                        <UploadComponent/>
+                        <UploadComponent />
                         {fileList.filter((file) => file.is_delete === 0).map((file) => (
-                            <FileComponent key={file.id} id={file.id} description={file}/>
+                            <FileComponent key={file.id} id={file.id} description={file} />
                         ))}
                     </div>
                 </div>
             </div>
-            
+
         </>
     );
 };

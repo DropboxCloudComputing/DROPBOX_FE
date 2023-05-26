@@ -96,7 +96,7 @@ const FileComponent = ({ id, description }) => {
         <>
             <Fragment>
                 <div
-                    className="justify-center relative overflow-auto rounded-lg border-gray-300 border-2 px-4 py-2 mx-5 bg-white w-48 h-48 shadow-sm my-3"
+                    className="z-10 justify-center relative overflow-auto rounded-lg border-gray-300 border-2 px-4 py-2 mx-5 bg-white w-48 h-48 shadow-sm my-3"
                 >
                     <div className="flex-col">
                         <button type="button" onClick={handleFileOpen} value={description.id} className="text-sm font-medium text-gray-600">{description.name}</button>

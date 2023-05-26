@@ -12,10 +12,16 @@ export const fileListState = atom({
         ]
 });
 
+export const folderListState = atom({
+    key : 'folderList',
+    default : [
+        { id: 1, name: 'ㅎㅇ'},
+    ]
+})
 export const sharedFolderState = atom({
     key : 'sharedList',
     default : [
-        { id: 1, name: '클라우드 컴퓨팅', path: ''},
+        { id: 1, name: '클라우드 컴퓨팅', path: '/cloud-computing'},
         { id: 2, name: '소프트웨어 공학', path: ''},
     ]
 });
@@ -28,4 +34,9 @@ export const isFileOpenState = atom({
 export const FileIdState = atom({
     key : 'FileId',
     default : 0
+});
+
+export const openFolderCreationState = atom({
+    key : 'FolderCreation',
+    default : false
 });

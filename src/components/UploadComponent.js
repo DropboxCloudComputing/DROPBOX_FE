@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useRecoilState } from 'recoil';
 import { fileListState } from "../recoil/atom";
 
@@ -20,21 +20,19 @@ function UploadComponent() {
     };
 
     return (
-        <Fragment>
-            <form onSubmit={handleFileChange}>
-                <div className="justify-center relative overflow-auto rounded-lg border-dotted bg-gray-200 border-gray-300 border-2 px-4 py-2 mx-5 w-48 h-48 shadow-sm my-3">
-                    <label htmlFor="file-input" className="absolute inset-0 cursor-pointer">
-                        <input id="file-input" type="file" className="sr-only" onChange={handleFileChange} />
-                        <span className="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
-                            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 15H16V20H8V15H3V10L12 3L21 10V15ZM9 17H15V22H9V17ZM5 12H19L12 6L5 12Z" fill="currentColor" />
-                            </svg>
-                            <span className="mt-2 text-sm font-medium">Click to upload a file</span>
-                        </span>
-                    </label>
-                </div>
-            </form>
-        </Fragment>
+        <form onSubmit={handleFileChange}>
+            <div className="justify-center relative overflow-auto rounded-lg border-dotted bg-gray-200 border-gray-300 border-2 px-4 py-2 mx-5 w-48 h-48 shadow-sm my-3">
+                <label htmlFor="file-input" className="absolute inset-0 cursor-pointer">
+                    <input id="file-input" type="file" className="sr-only" onChange={handleFileChange} />
+                    <span className="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
+                        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 15H16V20H8V15H3V10L12 3L21 10V15ZM9 17H15V22H9V17ZM5 12H19L12 6L5 12Z" fill="currentColor" />
+                        </svg>
+                        <span className="mt-2 text-sm font-medium">Click to upload a file</span>
+                    </span>
+                </label>
+            </div>
+        </form>
     );
 }
 
