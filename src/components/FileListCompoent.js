@@ -1,4 +1,4 @@
-import React, { Fragment,useState } from 'react';
+import React, { Component, Fragment,useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { fileListState, isFileOpenState, FileIdState } from '../recoil/atom';
 
@@ -37,14 +37,16 @@ const FileDescription = ({ _id, props }) => {
     return (
         <>
             {fileId == _id &&
-                <div className={"text-center bg-gray-100 absolute top-28 bottom-28 right-0 h-screen z-10 duration-75 border-4 border-gray-200 w-52"}>
+                <div className="text-center bg-gray-100 absolute top-0 right-0 h-screen z-40 duration-75 border-2 border-gray-200">
                     <button
                         className="border-2 font-bold py-2 px-4 rounded mt-4"
                         onClick={handleDescriptionClose}
                     >
                         X
                     </button>
-                    <h2 className="py-3.5 text-lg font-bold mb-2">{props.name}</h2>
+                    <div>
+                    <textarea className="2-full h-14 resize-none text-center py-3.5 text-lg font-bold mb-2 outline-none bg-gray-100 border-none">{props.name}</textarea>
+                    </div>
                     <p className='pb-1.5'>{formatBytes(props.size)}</p>
                     <select
                         className="px-4 py-2 border border-gray-300 rounded-md"
@@ -55,8 +57,10 @@ const FileDescription = ({ _id, props }) => {
                             <option key={option} value={option}>{option}</option>
                         ))}
                     </select>
-                    <p>Memo</p>
-                    <p></p>
+                    <div>
+                    <p className='py-2'>Memo</p>
+                    <textarea rows={4} value={props.memo} type="text-area" className='resize-none'></textarea>
+                    </div>
                     <button
                         className="mt-5 border-2 bg-gray-200 hover:bg-gray-500 font-bold py-2 px-4 rounded"
                         onClick={() => handleDownload(props.url)}
@@ -72,6 +76,7 @@ const FileComponent = ({ id, description }) => {
     const [fileList, setFileList] = useRecoilState(fileListState);
     const [isFileOpen, setIsFileOpen] = useRecoilState(isFileOpenState);
     const setFileId = useSetRecoilState(FileIdState);
+
 
     const handleDelete = (fileId) => {
         setFileList(fileList => {
@@ -100,6 +105,7 @@ const FileComponent = ({ id, description }) => {
                 >
                     <div className="flex-col">
                         <button type="button" onClick={handleFileOpen} value={description.id} className="text-sm font-medium text-gray-600">{description.name}</button>
+
                         <div className="text-xs text-gray-500">{formatBytes(description.size)}</div>
                     </div>
                     <div className='absolute bottom-2 inset-x-10'>
