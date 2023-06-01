@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 
 const FolderListComponent = ({id,description}) => {
     const [folders, setFolders] = useRecoilState(folderListState);
-
     const handleDelete = (folderId) => {
         setFolders(folders.filter((folder) => folder.id !== folderId));
     };

@@ -4,19 +4,25 @@ import Sidebar from "../pages/common/Sidebar";
 import UploadComponent from "./UploadComponent";
 import FileComponent from "./FileListCompoent";
 import { useRecoilValue } from "recoil";
-import { fileListState, folderListState } from "../recoil/atom";
+import { fileListState, folderListState, openFolderCreationState, openRelationCreationState } from "../recoil/atom";
 import FolderListComponent from "./FolderListComponent";
+import {FolderModals,RelationModals} from "./common/SidebarComponent";
+import "../static/index.css";
 
 const MainPageComponent = () => {
     const fileList = useRecoilValue(fileListState);
     const folderList = useRecoilValue(folderListState);
+    const openFolderCreation = useRecoilValue(openFolderCreationState);
+    const openRelationCreation = useRecoilValue(openRelationCreationState);
 
     return (
         <>
             <Header />
             <div className="flex flex-row">
                 <Sidebar />
-                <div className="relative ml-56 flex-col justify-center items-center z-0">
+                <div className="ml-56 flex-col justify-center items-center z-20">
+                    {openFolderCreation && <FolderModals />}
+                    {openRelationCreation && <RelationModals />}
                     <div className="ml-10 my-3">
                         <h1>Folders</h1>
                     </div>
@@ -36,7 +42,14 @@ const MainPageComponent = () => {
                     </div>
                 </div>
             </div>
-
+            <footer className="bottom-0">
+                    <div class="waves">
+                        <div class="wave" id="wave1"></div>
+                        <div class="wave" id="wave2"></div>
+                        <div class="wave" id="wave3"></div>
+                        <div class="wave" id="wave4"></div>
+                    </div>
+            </footer>
         </>
     );
 };

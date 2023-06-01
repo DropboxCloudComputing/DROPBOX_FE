@@ -1,22 +1,27 @@
 import React from "react";
 import Logo from "../static/logo-ball.webp";
-import {Link, redirect} from "react-router-dom";
-import loginUser from "../apis/User";
+import {Link, useNavigate} from "react-router-dom";
+import {loginUser} from "../apis/User";
 import { useSetRecoilState } from "recoil";
 import { isLogInState } from "../recoil/atom";
 
 const LoginComponent = () => {
     const isLoggedIn = useSetRecoilState(isLogInState);
+    let navigate = useNavigate(); 
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
-        const status = loginUser({email,password});
-        if(status === 200){
-            isLoggedIn(true);
-            return redirect("/");
-        }
+
+        loginUser(email,password)
+            .then(status => {
+                isLoggedIn(true);
+                return navigate("/");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
 
 

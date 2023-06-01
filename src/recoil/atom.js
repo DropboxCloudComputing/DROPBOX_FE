@@ -3,7 +3,7 @@ import {atom} from "recoil";
 export const fileListState = atom({
     key : 'fileList',
     default : [
-        { id: 1, name: 'file1.pdf', size: 123456, is_delete: 0, url: '"C:/Users/MINSEOK/Downloads/folder.png"'},
+        { id: 1, name: 'file1.pdf', size: 123456, is_delete: 0, memo: "This is file1",url: 'C:/Users/MINSEOK/Downloads/folder.png'},
         { id: 2, name: 'file2.jpg', size: 654321, is_delete: 0, url: 'http://example.com/file1.pdf' },
         { id: 3, name: 'file3.docx', size: 987654, is_delete: 0, url: 'http://example.com/file1.pdf'},
         { id: 4, name: 'file3.docx', size: 987654, is_delete: 0, url: 'http://example.com/file1.pdf'},
@@ -18,6 +18,7 @@ export const folderListState = atom({
         { id: 1, name: 'ㅎㅇ', link: '/1'},
     ]
 })
+
 export const sharedFolderState = atom({
     key : 'sharedList',
     default : [
@@ -41,7 +42,16 @@ export const openFolderCreationState = atom({
     default : false
 });
 
+export const openRelationCreationState = atom({
+    key : 'RealationCreation',
+    default : false
+})
 export const isLogInState = atom({
     key : 'isLogIn',
     default : false 
+})
+
+export const currentStatusState = atom({
+    key : 'currentStatus',
+    default : "Home"
 })

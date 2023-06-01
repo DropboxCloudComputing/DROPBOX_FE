@@ -48,9 +48,13 @@ const FileDescription = ({ _id, props }) => {
                     >
                         X
                     </button>
+                    <form>
                     <div>
-                    <textarea onChange={changeName} defaultValue={props.name} className="2-full h-14 resize-none text-center py-3.5 text-lg font-bold mb-2 outline-none bg-gray-100 border-none"></textarea>
+                    <textarea onChange={changeName} defaultValue={props.name} className="2-full h-14 resize-none text-center py-3.5 text-lg font-bold outline-none bg-gray-100 border-none"></textarea>
+                    <div><button className='border-2 font-bold px-2 rounded mt-4'>제목 수정</button></div>
                     </div>
+                    </form>
+                    
                     <p className='pb-1.5'>{formatBytes(props.size)}</p>
                     <select
                         className="px-4 py-2 border border-gray-300 rounded-md"
@@ -119,11 +123,14 @@ const FileComponent = ({ id, description }) => {
                         <button type="button" onClick={handleFileOpen} value={description.id} className="text-sm font-medium text-gray-600">{description.name}</button>
 
                         <div className="text-xs text-gray-500">{formatBytes(description.size)}</div>
+                        <div className={description.memo ? "border mt-2" : ""}>
+                            {description.memo}
+                        </div>
                     </div>
                     <div className='absolute bottom-2 inset-x-10'>
                         <button
                             type="button"
-                            className="px-2 py-1 bg-red-500 text-white text-xs font-medium rounded"
+                            className="px-2 py-1 bg-stone-500 text-white text-xs font-medium rounded"
                             onClick={() => handleDelete(id)}
                         >
                             Delete
