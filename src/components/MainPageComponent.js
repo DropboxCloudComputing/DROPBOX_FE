@@ -1,19 +1,27 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import Header from "../pages/common/Header";
 import Sidebar from "../pages/common/Sidebar";
 import UploadComponent from "./UploadComponent";
 import FileComponent from "./FileListCompoent";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue,useRecoilState } from "recoil";
 import { fileListState, folderListState, openFolderCreationState, openRelationCreationState } from "../recoil/atom";
 import FolderListComponent from "./FolderListComponent";
 import {FolderModals,RelationModals} from "./common/SidebarComponent";
+import {getFileList} from "../apis/File.js";
 import "../static/index.css";
 
 const MainPageComponent = () => {
-    const fileList = useRecoilValue(fileListState);
+    const [fileList,setFileList] = useRecoilState(fileListState);
     const folderList = useRecoilValue(folderListState);
     const openFolderCreation = useRecoilValue(openFolderCreationState);
     const openRelationCreation = useRecoilValue(openRelationCreationState);
+
+    useEffect(() => {
+        getFileList()
+            .then(response => {
+                setFileList(response);
+            })
+    },[]);
 
     return (
         <>

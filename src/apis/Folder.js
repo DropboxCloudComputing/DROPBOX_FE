@@ -4,7 +4,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8000";
 axios.defaults.headers.common["Authorization"] = localStorage["JWT"];
 
 const shareFolder = async (nameList, pFolder) => {
-    return await axios.post('http://127.0.0.1:8000/api/v1/folders/share/',
+    return await axios.post('/api/v1/folders/share/',
         {
             "receiver": nameList,
             "folderId" : pFolder

@@ -66,7 +66,6 @@ const RelationModals = () => {
 
     const createRelation = (event) => {
         event.preventDefault();
-
         console.log(event.target.name.value);
         const name = event.target.name.value;
         shareFolder(name)
