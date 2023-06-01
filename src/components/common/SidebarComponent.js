@@ -20,8 +20,8 @@ const FolderModals = () => {
     }
 
     return (
-        <div className="relative" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div className="static inset-0 z-50 overflow-y-auto">
+        <div className="absolute" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div className="relative inset-0 z-50 overflow-y-auto">
                 <div className="z-50 flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <div className="border-4 relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                         <form onSubmit={createNewFolder}>
@@ -85,6 +85,16 @@ const SidebarComponent = () => {
                         >
                             <span className="text-lg">+ </span>Create Folder
                         </button>
+                    </form>
+                </div>
+                <div className="container mx-auto my-1 end-0 relative pt-5 items-center text-center">
+                    <form
+                    type="submit"
+                    className=" text-base py-2 px-4 rounded-lg border-2 hover:bg-gray-300 p-3 ml-1 w-full"
+                    >
+                    <button>
+                        친구 초대
+                    </button>
                     </form>
                 </div>
                 {openFolderCreation && <FolderModals />}

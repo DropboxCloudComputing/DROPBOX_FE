@@ -40,3 +40,8 @@ export const openFolderCreationState = atom({
     key : 'FolderCreation',
     default : false
 });
+
+export const isLogInState = atom({
+    key : 'isLogIn',
+    default : false 
+})

@@ -16,7 +16,7 @@ const MainPageComponent = () => {
             <Header />
             <div className="flex flex-row">
                 <Sidebar />
-                <div className="relative ml-56 flex-col justify-center items-center">
+                <div className="relative ml-56 flex-col justify-center items-center z-0">
                     <div className="ml-10 my-3">
                         <h1>Folders</h1>
                     </div>

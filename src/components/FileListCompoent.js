@@ -33,7 +33,11 @@ const FileDescription = ({ _id, props }) => {
         link.download = url.substring(url.lastIndexOf('/') + 1);
         link.click();
       };
-
+    
+    const changeName = (event) => {
+        event.preventDefault();
+        
+    };  
     return (
         <>
             {fileId == _id &&
@@ -45,7 +49,7 @@ const FileDescription = ({ _id, props }) => {
                         X
                     </button>
                     <div>
-                    <textarea className="2-full h-14 resize-none text-center py-3.5 text-lg font-bold mb-2 outline-none bg-gray-100 border-none">{props.name}</textarea>
+                    <textarea onChange={changeName} defaultValue={props.name} className="2-full h-14 resize-none text-center py-3.5 text-lg font-bold mb-2 outline-none bg-gray-100 border-none"></textarea>
                     </div>
                     <p className='pb-1.5'>{formatBytes(props.size)}</p>
                     <select
@@ -57,10 +61,18 @@ const FileDescription = ({ _id, props }) => {
                             <option key={option} value={option}>{option}</option>
                         ))}
                     </select>
-                    <div>
-                    <p className='py-2'>Memo</p>
-                    <textarea rows={4} value={props.memo} type="text-area" className='resize-none'></textarea>
-                    </div>
+                    <form>
+                        <div>
+                            <p className='py-2'>Memo</p>
+                            <textarea rows={4} value={props.memo} type="text-area" className='resize-none'></textarea>
+                            <div>
+                                <button className='border-2 font-bold py-2 px-4 rounded mt-4'>
+                                    수정
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
                     <button
                         className="mt-5 border-2 bg-gray-200 hover:bg-gray-500 font-bold py-2 px-4 rounded"
                         onClick={() => handleDownload(props.url)}
