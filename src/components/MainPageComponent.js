@@ -43,11 +43,11 @@ const MainPageComponent = () => {
                 </div>
             </div>
             <footer className="bottom-0">
-                    <div class="waves">
-                        <div class="wave" id="wave1"></div>
-                        <div class="wave" id="wave2"></div>
-                        <div class="wave" id="wave3"></div>
-                        <div class="wave" id="wave4"></div>
+                    <div className="waves">
+                        <div className="wave" id="wave1"></div>
+                        <div className="wave" id="wave2"></div>
+                        <div className="wave" id="wave3"></div>
+                        <div className="wave" id="wave4"></div>
                     </div>
             </footer>
         </>

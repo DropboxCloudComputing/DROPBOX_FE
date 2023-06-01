@@ -35,10 +35,12 @@ const loginUser = async (email, password) => {
       }
     )
     .then((response) => {
-      console.log(response.data);
+      console.log(response.data["access_token"]);
+      localStorage.setItem("JWT", "Bearer " + response.data["access_token"]);
       return response.status;
     })
     .catch((response) => { console.log('Error!') });
 };
+
 
 export  { loginUser,registerUser };

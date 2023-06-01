@@ -53,5 +53,5 @@ export const isLogInState = atom({
 
 export const currentStatusState = atom({
     key : 'currentStatus',
-    default : "Home"
+    default : ["Home",0]
 })

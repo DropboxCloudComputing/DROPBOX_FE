@@ -3,19 +3,27 @@ import { Link } from "react-router-dom";
 import garbage from "../../static/garbage.png"
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { sharedFolderState, isFileOpenState, openFolderCreationState, folderListState, currentStatusState,openRelationCreationState } from "../../recoil/atom";
+import {createFolder, shareFolder} from "../../apis/Folder.js";
 
 const FolderModals = () => {
     const resetState = useResetRecoilState(openFolderCreationState);
     const [folders, setFolders] = useRecoilState(folderListState);
+    const [_, pId] = useRecoilValue(currentStatusState);
 
     const createNewFolder = (event) => {
         event.preventDefault();
         const targetName = event.target.name.value;
-        const newFolder = {
-            id: 2,
-            name: targetName,
-        };
-        setFolders([...folders, newFolder]);
+        createFolder(targetName,pId)
+            .then(response =>{
+                const newFolder = {
+                    id: response.id,
+                    name: response.folder_name,
+                };
+                setFolders([...folders, newFolder]);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         resetState();
     }
 
@@ -58,6 +66,16 @@ const RelationModals = () => {
 
     const createRelation = (event) => {
         event.preventDefault();
+
+        console.log(event.target.name.value);
+        const name = event.target.name.value;
+        shareFolder(name)
+            .then(response =>{
+                console.log("success!!!");
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (
@@ -98,7 +116,7 @@ const RelationModals = () => {
 const SidebarComponent = () => {
     const sharedFolder = useRecoilValue(sharedFolderState);
     const resetDescription = useResetRecoilState(isFileOpenState);
-    const currentState = useRecoilValue(currentStatusState);
+    const [currentState, _] = useRecoilValue(currentStatusState);
     const setOpenFolderCreation = useSetRecoilState(openFolderCreationState);
     const setOpenRelationCreation = useSetRecoilState(openRelationCreationState);
 
