@@ -16,8 +16,11 @@ const LoginComponent = () => {
 
         loginUser(email,password)
             .then(status => {
-                isLoggedIn(true);
-                return navigate("/");
+                if(status === 200){
+                    isLoggedIn(true);
+                    return navigate("/");
+                } 
+                
             })
             .catch(error => {
                 console.error('Error:', error);

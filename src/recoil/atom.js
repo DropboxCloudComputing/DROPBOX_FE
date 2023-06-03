@@ -3,12 +3,12 @@ import {atom} from "recoil";
 export const fileListState = atom({
     key : 'fileList',
     default : [
-        { id: 1, name: 'file1.pdf', size: 123456, is_delete: 0, memo: "This is file1",url: 'C:/Users/MINSEOK/Downloads/folder.png'},
-        { id: 2, name: 'file2.jpg', size: 654321, is_delete: 0, url: 'http://example.com/file1.pdf' },
-        { id: 3, name: 'file3.docx', size: 987654, is_delete: 0, url: 'http://example.com/file1.pdf'},
-        { id: 4, name: 'file3.docx', size: 987654, is_delete: 0, url: 'http://example.com/file1.pdf'},
-        { id: 5, name: 'fileABC.docx', size: 987654, is_delete: 1, url: 'http://example.com/file1.pdf'},
-        { id: 6, name: 'fileDEF.docx', size: 987654, is_delete: 1, url: 'http://example.com/file1.pdf'},
+        { id: 1, name: 'file1.pdf', size: 123456, removed: false, memo: "This is file1",url: 'C:/Users/MINSEOK/Downloads/folder.png'},
+        { id: 2, name: 'file2.jpg', size: 654321, removed: false, url: 'http://example.com/file1.pdf' },
+        { id: 3, name: 'file3.docx', size: 987654, removed: false, url: 'http://example.com/file1.pdf'},
+        { id: 4, name: 'file3.docx', size: 987654, removed: false, url: 'http://example.com/file1.pdf'},
+        { id: 5, name: 'fileABC.docx', size: 987654, removed: true, url: 'http://example.com/file1.pdf'},
+        { id: 6, name: 'fileDEF.docx', size: 987654, removed: true, url: 'http://example.com/file1.pdf'},
         ]
 });
 

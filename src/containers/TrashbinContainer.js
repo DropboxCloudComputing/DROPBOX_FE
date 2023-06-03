@@ -4,6 +4,7 @@ import Sidebar from "../pages/common/Sidebar";
 import FileComponent from "../components/FileListCompoent";
 import { useRecoilValue } from "recoil";
 import { fileListState } from "../recoil/atom";
+import "../static/index.css";
 
 const TrashbinContainer = () => {
     const fileList = useRecoilValue(fileListState);
@@ -21,7 +22,14 @@ const TrashbinContainer = () => {
                     </div>
                 </div>
             </div>
-
+            <footer className="bottom-0">
+                    <div className="waves">
+                        <div className="wave" id="wave1"></div>
+                        <div className="wave" id="wave2"></div>
+                        <div className="wave" id="wave3"></div>
+                        <div className="wave" id="wave4"></div>
+                    </div>
+            </footer>
         </>
     );
 };

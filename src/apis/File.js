@@ -19,4 +19,4 @@ const getSpecificFileList = async (sortBy,orderBy) => {
     .catch(error => {console.log(error);})
 }
 
-export {getFileList};
+export {getFileList,getSpecificFileList};
