@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { fileListState } from "../recoil/atom";
-
+import { uploadFile } from '../apis/File';
 
 function UploadComponent() {
     const [fileList, setFileList] = useRecoilState(fileListState);
@@ -9,14 +9,21 @@ function UploadComponent() {
     const handleFileChange = (event) => {
         event.preventDefault();
         const file = event.target.files[0];
+        const folderId = 0;
+        const memo = "hi";
+        uploadFile(file,folderId,memo)
+            .then(
+                status => {
+                    console.log(status);
+                }
+            )
         const newFile = {
             id: file.id ? file.id : 10,
             name: file.name,
             size: file.size,
             is_delete: 0
         };
-
-        setFileList([...fileList, newFile]);
+        setFileList(...fileList,newFile);
     };
 
     return (

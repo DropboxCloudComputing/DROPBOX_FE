@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect,useState } from "react";
 import Header from "../pages/common/Header";
 import Sidebar from "../pages/common/Sidebar";
 import UploadComponent from "./UploadComponent";
@@ -16,12 +16,17 @@ const MainPageComponent = () => {
     const openFolderCreation = useRecoilValue(openFolderCreationState);
     const openRelationCreation = useRecoilValue(openRelationCreationState);
 
-    // useEffect(() => {
-    //     getFileList()
-    //         .then(response => {
-    //             setFileList(...fileList,response);
-    //         })
-    // },[]);
+    const [currFileList,setCurrFileList] = useState([]);
+
+    useEffect(() => {
+        getFileList()
+            .then(response => {
+                console.log(response);
+                setFileList(fileList);
+            })
+        
+        setCurrFileList(fileList.filter((file) => (file.removed === false)));
+    },[]);
 
     return (
         <>
@@ -44,9 +49,9 @@ const MainPageComponent = () => {
                     </div>
                     <div className='flex flex-wrap ml-5 text-center'>
                         <UploadComponent />
-                        {fileList.filter((file) => file.removed === false).map((file) => (
-                            <FileComponent key={file.id} id={file.id} description={file} />
-                        ))}
+                        {currFileList.map(file=>{
+                            return <FileComponent key={file.id} id={file.id} description={file}/>;
+                        })}
                     </div>
                 </div>
             </div>
@@ -61,5 +66,7 @@ const MainPageComponent = () => {
         </>
     );
 };
-
+// {fileList.filter((file)).map((file) => (
+//     <FileComponent key={file.id} id={file.id} description={file} />
+// ))}
 export default MainPageComponent;

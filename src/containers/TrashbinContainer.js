@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState,useEffect } from "react";
 import Header from "../pages/common/Header";
 import Sidebar from "../pages/common/Sidebar";
 import FileComponent from "../components/FileListCompoent";
@@ -8,7 +8,12 @@ import "../static/index.css";
 
 const TrashbinContainer = () => {
     const fileList = useRecoilValue(fileListState);
-    
+    const [deletedFile,setDeletedFile] =  useState([]);
+
+    useEffect(() => {
+        setDeletedFile(fileList.filter((file) => (file.removed === true)));
+    },[]);
+
     return (
         <>
             <Header />
@@ -16,8 +21,8 @@ const TrashbinContainer = () => {
                 <Sidebar />
                 <div className="flex-col ml-56 justify-center items-center">
                     <div className='flex flex-wrap ml-5 text-center'>
-                        {fileList.filter((file) => file.is_delete === 1).map((file) => (
-                            <FileComponent key={file.id} id={file.id} description={file} />
+                        {deletedFile.map((file) => (
+                            <FileComponent key={file.id} id={file.id} description={file} is_removed={true} />
                         ))}
                     </div>
                 </div>

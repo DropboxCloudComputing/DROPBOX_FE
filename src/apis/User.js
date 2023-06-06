@@ -45,5 +45,4 @@ const loginUser = async (email, password) => {
     .catch((response) => { console.log('Error!') });
 };
 
-
 export  { loginUser,registerUser };

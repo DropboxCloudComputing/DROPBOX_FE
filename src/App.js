@@ -13,7 +13,8 @@ function App() {
     <>
       <Routes>
         <Route element={<MainPage />} path="/" />
-        <Route element={<DetailFileList />} path="/:id" />
+        <Route element={<DetailFileList />} path="/folder/:id" />
+        <Route element={<TrashbinPage />} path="/favorites" />
         <Route element={<TrashbinPage />} path="/trashbin"/>
         <Route element={<Login />} path="/login" />
       </Routes>

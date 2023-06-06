@@ -8,7 +8,6 @@ const SearchCompoenent = () => {
         console.log(event.target[0].value);
     };
 
-    
     return (
         <>
             <Fragment>
@@ -29,6 +28,10 @@ const SearchCompoenent = () => {
 
 
 const HeaderComponent = () => {
+    const handleLogout = () => {
+        localStorage.removeItem("JWT");
+    }
+
     return(
         <>
             <header className='bg-white border-b-4'>
@@ -41,7 +44,7 @@ const HeaderComponent = () => {
                     </div>
                     <SearchCompoenent/>
                     <div className="header-component mr-5">
-                        <Link to="/login" className="header-login">Log Out
+                        <Link to="/login" onClick={handleLogout} className="header-login">Log Out
                             <span aria-hidden="true">&rarr;</span>
                         </Link>
                     </div>

@@ -113,7 +113,7 @@ const RelationModals = () => {
 
 
 const SidebarComponent = () => {
-    const sharedFolder = useRecoilValue(sharedFolderState);
+    //const sharedFolder = useRecoilValue(sharedFolderState);
     const resetDescription = useResetRecoilState(isFileOpenState);
     const [currentState, _] = useRecoilValue(currentStatusState);
     const setOpenFolderCreation = useSetRecoilState(openFolderCreationState);
@@ -129,6 +129,8 @@ const SidebarComponent = () => {
         setOpenRelationCreation(true);
     }
 
+
+
     return (
         <>
             <div className="absolute p-5 w-60 bg-gray-100 overflow-auto h-5/6">
@@ -143,6 +145,14 @@ const SidebarComponent = () => {
                         </div>
                     </Link>
                 </div>
+                <div className="container mx-auto my-1 end-0 relative pt-5 items-center text-center">
+                    <Link to={'/favorites'} onClick={resetDescription}>
+                        <div className="text-base py-2 px-4 rounded-lg border-2 hover:bg-gray-300 p-3 ml-1 w-full">
+                            <p>favorites</p>
+                        </div>
+                    </Link>
+                </div>
+                
                 <div className="container mx-auto my-1 end-0 relative pt-5 items-center text-center">
                     <form onSubmit={handleNewFolderSubmit}>
                         <button
@@ -163,7 +173,12 @@ const SidebarComponent = () => {
                     </button>
                     </form>
                 </div>
-                <div className="ml-5 text-gray-400 text-base sm:text-base rounded-lg block p-2.5 mt-5"  >
+            </div>
+        </>
+    );
+};
+
+/*{ <div className="ml-5 text-gray-400 text-base sm:text-base rounded-lg block p-2.5 mt-5"  >
                     <p>공유된 폴더</p>
                 </div>
                 <div className="border-b-2 border-gray-300 "></div>
@@ -175,11 +190,6 @@ const SidebarComponent = () => {
                             </div>
                         </Link>
                     )
-                })}
-            </div>
-
-        </>
-    );
-};
+                })} } */
 
 export  {SidebarComponent,FolderModals,RelationModals};

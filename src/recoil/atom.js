@@ -15,7 +15,7 @@ export const fileListState = atom({
 export const folderListState = atom({
     key : 'folderList',
     default : [
-        { id: 1, name: 'ㅎㅇ', link: '/1'},
+        { id: 1, name: 'ㅎㅇ', link: 'folder/1'},
     ]
 })
 
