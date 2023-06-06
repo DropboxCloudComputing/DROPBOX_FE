@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import garbage from "../../static/garbage.png"
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
@@ -130,10 +130,26 @@ const SidebarComponent = () => {
     }
 
 
+    const [topOffset, setTopOffset] = useState(108);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 0) {
+        setTopOffset(0);
+      } else {
+        setTopOffset(108);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
     return (
         <>
-            <div className="absolute p-5 w-60 bg-gray-100 overflow-auto h-5/6">
+      <div className="fixed left-0 top-[0px] h-screen p-5 w-60 bg-gray-100 overflow-auto" style={{ top: `${topOffset}px` }}>
                 <div className="text-center  text-gray-500  text-3xl sm:text-3xl rounded-lg block px-2.5 pb-5" >
                     {currentState}
                 </div>
