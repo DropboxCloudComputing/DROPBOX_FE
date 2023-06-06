@@ -3,6 +3,7 @@
 import React from "react";
 import {Routes,Route} from "react-router-dom";
 import Login from "./pages/LoginPage";
+import Register from "./pages/RegisterPage";
 import MainPage from "./pages/MainPage";
 import TrashbinPage from "./pages/TrashbinPage";
 import DetailFileList from "./pages/DetailFileListPage";
@@ -17,6 +18,7 @@ function App() {
         <Route element={<TrashbinPage />} path="/favorites" />
         <Route element={<TrashbinPage />} path="/trashbin"/>
         <Route element={<Login />} path="/login" />
+        <Route element={<Register />} path="/register" />
       </Routes>
     </>
   );
