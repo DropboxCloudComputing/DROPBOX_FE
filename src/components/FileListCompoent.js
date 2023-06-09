@@ -139,6 +139,7 @@ const FileDescription = ({ _id, props }) => {
 const FileComponent = ({ id, description }) => {
     const [fileList, setFileList] = useRecoilState(fileListState);
     const [isFileOpen, setIsFileOpen] = useRecoilState(isFileOpenState);
+
     const setFileId = useSetRecoilState(FileIdState);
 
     const handleDelete = (fileId) => {
@@ -159,6 +160,21 @@ const FileComponent = ({ id, description }) => {
         setFileId(event.target.value);
         setIsFileOpen(true);
     }
+
+    const handleFileFavorite = () => {
+        const updatedFileList = fileList.map(file => {
+            if (file.id === id) {
+                return { ...file, favorite: !file.favorite };
+            }
+            return file;
+        });
+        setFileList(updatedFileList);
+
+        // Optionally make an API call here to update the favorite status in your backend.
+    };
+
+    const isFavorite = fileList.find(file => file.id === id)?.favorite;
+
 
     const filename = description.name;
     const fileExtension = filename.split('.').pop();
@@ -192,9 +208,13 @@ const FileComponent = ({ id, description }) => {
       <button type="button" onClick={handleFileOpen} className="mr-2 text-gray-500 hover:text-blue-800">
         <FontAwesomeIcon icon={faDownload}  size="lg"  />
       </button>
-      <button type="button" onClick={handleFileOpen} className="mr-2 text-gray-500 hover:text-blue-800 ">
-        <FontAwesomeIcon icon={faStar}  size="lg"  />
-      </button>
+      <button
+                type="button"
+                onClick={handleFileFavorite}
+                className={`mr-2 ${isFavorite ? 'text-blue-800' : 'text-gray-500'} hover:text-blue-800`}
+            >
+                <FontAwesomeIcon icon={faStar} size="lg" />
+            </button>
       
     </div>
     <div className='pt-2'>
