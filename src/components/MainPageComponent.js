@@ -1,33 +1,57 @@
-import { React, useEffect,useState } from "react";
+import { React, useEffect } from "react";
 import Header from "../pages/common/Header";
 import Sidebar from "../pages/common/Sidebar";
 import UploadComponent from "./UploadComponent";
 import FileComponent from "./FileListCompoent";
-import { useRecoilValue,useRecoilState } from "recoil";
-import { fileListState, folderListState, openFolderCreationState, openRelationCreationState } from "../recoil/atom";
+import { useRecoilValue,useRecoilState,useResetRecoilState } from "recoil";
+import { currFolderListState,currentStatusState,currFileListState,fileListState, folderListState, openFolderCreationState, openRelationCreationState } from "../recoil/atom";
 import FolderListComponent from "./FolderListComponent";
 import {FolderModals,RelationModals} from "./common/SidebarComponent";
-import {getFileList} from "../apis/File.js";
+import { getContents } from "../apis/Folder.js";
 import "../static/index.css";
+import { useLocation } from "react-router-dom";
 
-const MainPageComponent = () => {
+const MainPageComponent = ({folderId}) => {
     const [fileList,setFileList] = useRecoilState(fileListState);
-    const folderList = useRecoilValue(folderListState);
+    const [currFolderList,setCurrFolderList] = useRecoilState(currFolderListState);
+    //const folderList = useRecoilValue(folderListState);
     const openFolderCreation = useRecoilValue(openFolderCreationState);
     const openRelationCreation = useRecoilValue(openRelationCreationState);
-
-    const [currFileList,setCurrFileList] = useState([]);
-
+    const [pId, setPId] = useRecoilState(currentStatusState);
+    const resetPID = useResetRecoilState(currentStatusState);
+    const [currFileList,setCurrFileList] = useRecoilState(currFileListState);
+    const location = useLocation();
+    
     useEffect(() => {
-        getFileList()
-            .then(response => {
-                console.log(response);
-                setFileList(fileList);
-            })
-        
-        setCurrFileList(fileList.filter((file) => (file.removed === false)));
-    },[]);
+        console.log(location);
+        const path = location.pathname.split("/");
+        console.log(path);
+        if (folderId === null){
+            resetPID();
+            //setCurrFileList(fileList.filter((file => (file.removed === false && file.version === 1))));
+            getContents(0)
+                .then(response => {
+                    setCurrFileList(response["files"].filter((file => (file.removed === false && file.version === 1))));
+                    setFileList(response["files"].filter((file => (file.removed === false && file.version === 1))));
+                })
 
+            getContents(null)
+                .then(response => {
+                    setCurrFolderList(response["folders"]);
+                })
+        }
+        else{
+            getContents(folderId)
+                .then(response => {
+                    console.log(response);
+                    setCurrFileList(response["files"].filter((file => (file.removed === false && file.version === 1 && file.folder_id === folderId))));
+                    setCurrFolderList(response["folders"].filter(folder => (folder.folder_id === folderId)));
+                    setFileList(response["files"].filter((file => (file.removed === false && file.version === 1 && file.folder_id === folderId))));
+                })
+        }
+        
+    },[setCurrFolderList,setCurrFileList]);
+    
     return (
         <>
             <Header />
@@ -40,7 +64,8 @@ const MainPageComponent = () => {
                         <h1>Folders</h1>
                     </div>
                     <div className="flex flex-wrap ml-5 text-center">
-                        {folderList.map((folder) => (
+                        {folderId !== null && <FolderListComponent key={0} id={0} description={{folder_name : "..."}}/>}
+                        {currFolderList.filter((folder) => (folder.id !== folderId)).map((folder) => (
                             <FolderListComponent key={folder.id} id={folder.id} description={folder} />
                         ))}
                     </div>
@@ -48,17 +73,15 @@ const MainPageComponent = () => {
                         <h1>Files</h1>
                     </div>
                     <div className='flex flex-wrap ml-5 text-center'>
-                        <UploadComponent />
-                        {currFileList.map(file=>{
-                            return <FileComponent key={file.id} id={file.id} description={file}/>;
-                        })}
+                        <UploadComponent folderId={folderId}/>
+                        {currFileList.map(file=>
+                            (<FileComponent key={file.id} id={file.id} description={file}/>)
+                        )}
                     </div>
                 </div>
             </div>
         </>
     );
 };
-// {fileList.filter((file)).map((file) => (
-//     <FileComponent key={file.id} id={file.id} description={file} />
-// ))}
+
 export default MainPageComponent;

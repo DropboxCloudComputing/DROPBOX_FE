@@ -1,8 +1,37 @@
 import React from "react";
 import Logo from "../static/logo-ball.webp";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
+
+const registerUser = async (full_name, email, password) => {
+    return await axios.post('http://127.0.0.1:8000/api/v1/user_app/signup/',
+      {
+        full_name: full_name,
+        email: email,
+        password: password
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then((response) =>{
+          return response.status;
+      })
+      .catch((error) => { console.log('Error!') })
+  }
 
 const RegisterComponent = () => {
+
+    let navigate = useNavigate();
+    const handleSubmit = (event) => {
+        registerUser(event.target[0].value,event.target[1].value,event.target[2].value)
+            .then(status => console.log(status))
+        
+        return navigate("/login");
+    }
+
     return (
         <>
             <section className="bg-gray-50">
@@ -16,7 +45,7 @@ const RegisterComponent = () => {
                             <h1 className="text-2xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                                 Sign up
                             </h1>
-                            <form className="space-y-4 md:space-y-6">
+                            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                             <div>
                                     <label for="name" className="text-left block mb-2 text-sm font-medium text-gray-900">Full Name</label>
                                     <input type="text" name="name" id="name" className="login-input" placeholder="Name" required=""/>

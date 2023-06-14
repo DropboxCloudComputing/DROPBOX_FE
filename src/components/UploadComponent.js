@@ -1,30 +1,31 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { fileListState } from "../recoil/atom";
+import { currFileListState } from "../recoil/atom";
 import { uploadFile } from '../apis/File';
 
-function UploadComponent() {
-    const [fileList, setFileList] = useRecoilState(fileListState);
+function UploadComponent({folderId}) {
+    const [currFileList,setCurrFileList] = useRecoilState(currFileListState);
 
     const handleFileChange = (event) => {
         event.preventDefault();
         const file = event.target.files[0];
-        const folderId = 0;
-        const memo = "hi";
-        uploadFile(file,folderId,memo)
+        const folder_Id = (folderId === null) ? 0 : folderId;
+        const memo = "";
+        //const newFile = { id: 20, file_name: 'file1.pdf', size: 123456, removed: false, memo: "This is file1 v1",url: 'C:/Users/MINSEOK/Downloads/folder.png',favorites: false,version: 1 }
+        //setCurrFileList(currFileList => [...currFileList,newFile]);
+       
+        uploadFile(file,folder_Id,memo)
             .then(
-                status => {
-                    console.log(status);
+                response => {
+                    const newData = {file_name : file.name,removed: false, memo: "",favorites: false,version: 1,size: file.size}
+                    setCurrFileList([...currFileList,newData]);
                 }
             )
-        const newFile = {
-            id: file.id ? file.id : 10,
-            name: file.name,
-            size: file.size,
-            is_delete: 0
-        };
-        setFileList(...fileList,newFile);
     };
+
+    const changeCurrFileList = (data) => {
+       
+    }
 
     return (
         <form onSubmit={handleFileChange}>

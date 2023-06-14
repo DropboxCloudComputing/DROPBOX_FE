@@ -6,8 +6,8 @@ axios.defaults.headers.common["Authorization"] = localStorage["JWT"];
 const shareFolder = async (nameList, pFolder) => {
     return await axios.post('/api/v1/folders/share/',
         {
-            "receiver": nameList,
-            "folderId" : pFolder
+            receiver: nameList,
+            folderId : pFolder
         },
         {
             'Content-type': 'application/json',
@@ -65,4 +65,22 @@ const changeFolderName = async (folderId,modifiedName) =>{
     .catch((error) => { console.log(error) });
 }
 
-export {shareFolder,createFolder,deleteFolder,changeFolderName};
+const getContents = async (folder_Id) => {
+    return await axios.post(`/api/v1/folders/getContents/`,
+        {
+            folderId : folder_Id,
+        },
+        {
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }
+    )
+    .then((response) => {
+        return response.data;
+    })
+    .catch((error) => {console.log(error);})
+}
+
+export {shareFolder,createFolder,deleteFolder,changeFolderName,getContents};

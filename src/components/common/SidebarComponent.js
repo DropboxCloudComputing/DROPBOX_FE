@@ -2,29 +2,25 @@ import {React, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import garbage from "../../static/garbage.png"
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { sharedFolderState, isFileOpenState, openFolderCreationState, folderListState, currentStatusState,openRelationCreationState } from "../../recoil/atom";
+import { currFolderListState,sharedFolderState, isFileOpenState, openFolderCreationState, folderListState, currentStatusState,openRelationCreationState } from "../../recoil/atom";
 import {createFolder, shareFolder} from "../../apis/Folder.js";
+
 
 const FolderModals = () => {
     const resetState = useResetRecoilState(openFolderCreationState);
-    const [folders, setFolders] = useRecoilState(folderListState);
+    const [folders, setFolders] = useRecoilState(currFolderListState);
     const [_, pId] = useRecoilValue(currentStatusState);
 
     const createNewFolder = (event) => {
         event.preventDefault();
         const targetName = event.target.name.value;
+        let newFolder = {folder_name: targetName};
         createFolder(targetName,pId)
             .then(response =>{
-                const newFolder = {
-                    id: response.id,
-                    name: response.folder_name,
-                };
                 setFolders([...folders, newFolder]);
             })
-            .catch(error => {
-                console.error('Error:', error);
-            });
         resetState();
+        
     }
 
     return (
@@ -164,7 +160,7 @@ const SidebarComponent = () => {
                 <div className="container mx-auto my-1 end-0 relative pt-5 items-center text-center">
                     <Link to={'/favorites'} onClick={resetDescription}>
                         <div className="text-base py-2 px-4 rounded-lg border-2 hover:bg-gray-300 p-3 ml-1 w-full">
-                            <p>favorites</p>
+                            <p>Favorites</p>
                         </div>
                     </Link>
                 </div>

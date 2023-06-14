@@ -7,6 +7,7 @@ import Register from "./pages/RegisterPage";
 import MainPage from "./pages/MainPage";
 import TrashbinPage from "./pages/TrashbinPage";
 import DetailFileList from "./pages/DetailFileListPage";
+import FavoritePage from "./pages/FavoritePage";
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route element={<MainPage />} path="/" />
         <Route element={<DetailFileList />} path="/folder/:id" />
-        <Route element={<TrashbinPage />} path="/favorites" />
+        <Route element={<FavoritePage />} path="/favorites" />
         <Route element={<TrashbinPage />} path="/trashbin"/>
         <Route element={<Login />} path="/login" />
         <Route element={<Register />} path="/register" />

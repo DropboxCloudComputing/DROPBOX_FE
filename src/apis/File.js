@@ -35,8 +35,17 @@ const putFavoriteFile = async (fileId) => {
     .catch(error => {console.log(error);})
 }
 
-const putMemo = async (fileId) => {
-    return await axios.put(`/api/v1/files/memos/${fileId}`)
+const putMemo = async (fileId,description) => {
+    return await axios.put(`/api/v1/files/memos/${fileId}`,
+    {
+        memo: description
+    },
+    {
+        headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
     .then(response => {
         return response.status;
     })
@@ -50,11 +59,35 @@ const uploadFile = async (file,folderId,memo) =>{
     formData.append("memo",memo);
     return await axios.post(`/api/v1/files/upload/`,formData)
     .then((response) => {
-        return response.status;
+        return response.data;
       })
       .catch((response) => { console.log('Error!') });
 }
 
+export const downloadFile = async(fileId) => {
+    return await axios.get(`api/v1/files/download/${fileId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {console.log(error)})
+}
 
+export const deleteFile = async (fileId) => {
+    return await axios.post(`/api/v1/trashbin/remove/${fileId}/`)
+    .then(response => {
+        return response.status;
+    })
+    .catch(error => {
+        console.log(error);
+    })
+}
+
+export const recoverFile = async(fileId) => {
+    return await axios.put(`/api/v1/trashbin/recover/${fileId}/`)
+        .then((response) => {
+            return response.status;
+        })
+        .catch((error) => {console.log(error)})
+}
 
 export {getFileList,getSpecificFileList,getFileDescription,putFavoriteFile,putMemo,uploadFile};

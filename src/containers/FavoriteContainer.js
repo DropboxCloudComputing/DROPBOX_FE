@@ -7,15 +7,16 @@ import { fileListState } from "../recoil/atom";
 import { getFileList } from "../apis/File";
 import "../static/index.css";
 
-const TrashbinContainer = () => {
-    const [deletedFile,setDeletedFile] =  useState([]);
+
+const FavoriteContainer = () => {
+    const [favoriteFile, setFavoriteFile] = useState([]);
 
     useEffect(() => {
         getFileList()
             .then(response => {
-                setDeletedFile(response.filter((file) => (file.removed === true )));
+                setFavoriteFile(response.filter((file) => (file.favorites === true)));
             })
-    },[]);
+    }, []);
 
     return (
         <>
@@ -24,22 +25,14 @@ const TrashbinContainer = () => {
                 <Sidebar />
                 <div className="flex-col ml-56 justify-center items-center">
                     <div className='flex flex-wrap ml-5 text-center'>
-                        {deletedFile.map((file) => (
-                            <FileComponent key={file.id} id={file.id} description={file} is_removed={true} />
+                        {favoriteFile.map((file) => (
+                            <FileComponent key={file.id} id={file.id} description={file} is_removed={false} />
                         ))}
                     </div>
                 </div>
             </div>
-            <footer className="bottom-0">
-                    <div className="waves">
-                        <div className="wave" id="wave1"></div>
-                        <div className="wave" id="wave2"></div>
-                        <div className="wave" id="wave3"></div>
-                        <div className="wave" id="wave4"></div>
-                    </div>
-            </footer>
         </>
-    );
+    )
 };
 
-export default TrashbinContainer;
+export default FavoriteContainer;

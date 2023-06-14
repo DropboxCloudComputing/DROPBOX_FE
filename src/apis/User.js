@@ -3,23 +3,6 @@ import axios from 'axios'
 axios.defaults.baseURL = "http://127.0.0.1:8000";
 axios.defaults.headers.common["Authorization"] = localStorage["JWT"];
 
-
-const registerUser = async (full_name, email, password) => {
-  return await axios.post('/api/v1/user_app/signup/',
-    {
-      full_name: full_name,
-      email: email,
-      password: password
-    },
-    {
-      headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json'
-      }
-    }
-  )
-}
-
 const loginUser = async (email, password) => {
   return await axios.post('/api/v1/user_app/login/',
       {
@@ -45,4 +28,4 @@ const loginUser = async (email, password) => {
     .catch((response) => { console.log('Error!') });
 };
 
-export  { loginUser,registerUser };
+export  { loginUser };

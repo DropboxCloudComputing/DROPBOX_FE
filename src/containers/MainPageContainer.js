@@ -4,7 +4,7 @@ import MainPageComponent from "../components/MainPageComponent";
 const MainPageContainer = () => {
     return(
         <>
-            <MainPageComponent />
+            <MainPageComponent folderId={null}/>
         </> 
     );
 };
